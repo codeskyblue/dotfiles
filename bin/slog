@@ -1,0 +1,32 @@
+#!/bin/bash
+#
+
+HISTORY=9
+function SvnLogAwk(){
+    awkp=$1
+    shift
+    svn log -l $HISTORY "$@" | awk "$awkp"
+}
+
+# SvnReversion(1) return "r123456"
+function SvnReversion(){
+    ver=$1; shift
+    if test -z "$ver"
+    then
+        echo "HEAD"
+        return
+    fi
+    SvnLogAwk "BEGIN{i=1} \$1 ~ /r[0-9]+/ {if(i==$ver) print \$1; i += 1}" "$@"
+}
+
+SvnLogAwk '
+    BEGIN {ind=0}
+    $1 ~ /r[0-9]+/ {printf("%d: %s %s %s %s  ", ind,$1,$5,$6,$3); getline; getline comment; print comment}
+    $1 ~ /-----+/ { ind += 1} ' "$@"
+
+read -p "diff version: " a b
+v1=$(SvnReversion "$a" "$@")
+v2=$(SvnReversion "$b" "$@")
+#echo $v1 $v2
+
+svn diff -r $v1:$v2 "$@"

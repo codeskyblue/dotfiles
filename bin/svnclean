@@ -1,0 +1,5 @@
+#!/bin/bash -
+#
+# clean already removed files
+
+svn st | grep '!' | awk '{print "svn rm --force "$2}' | sh -x

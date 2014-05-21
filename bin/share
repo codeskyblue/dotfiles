@@ -1,0 +1,24 @@
+#!/bin/sh
+#
+if test $# -eq 0
+then
+    echo "Usage: `basename $0` <file ...>"
+    exit 1
+fi
+
+genlink() {
+        echo http://$HOSTNAME:8119$(readlink -f ${1})
+}
+
+for filename in $@
+do
+    if test -f $filename
+    then
+	genlink ${filename}
+    else
+        filename=`which $filename`
+	genlink ${filename}
+        #echo "Filename($filename) not exists"
+    fi
+done
+

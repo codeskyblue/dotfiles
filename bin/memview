@@ -1,0 +1,18 @@
+#!/bin/bash -
+#
+# rss, vss
+
+if test $# -ne 1
+then
+	echo "Usage: $(basename $0) <cmd name>"
+	exit 1
+fi
+
+ps -eo pid,cmd | 
+	grep "$1" | grep -v grep | grep -v "$0"
+
+ps -eo pid,cmd | 
+	grep "$1" | grep -v grep | grep -v "$0" | 
+	awk '{print $1}' | 
+	xargs -i{} cat /proc/{}/status | 
+	awk '/^Vm(RSS|Size)/ {print}'

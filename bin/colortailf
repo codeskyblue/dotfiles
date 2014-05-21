@@ -1,0 +1,27 @@
+#!/bin/bash
+#
+
+if test $# -ne 1
+then
+        echo "Usage: $(basename $0) <log name>"
+        exit 1
+fi
+
+# 31 red
+# 32 green
+# 35 purple
+# 
+tailf "$1" | while read line
+do 
+        LEVEL=$(echo "$line" | egrep -o "DEBUG|WARN|TRACE")
+        case "$LEVEL" in
+        WARN)
+                echo -n -e "\033[31m" ;;
+        TRACE)
+                echo -n -e "\033[37m" ;;
+        DEBUG)
+                echo -n -e "\033[36m" ;;
+        esac
+        echo -n "$line"
+        echo -e "\033[0m"
+done

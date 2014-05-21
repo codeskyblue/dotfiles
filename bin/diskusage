@@ -1,0 +1,9 @@
+#!/bin/sh
+#
+
+
+#for folder in /bin /boot /dev /DoorGod /etc /home /initrd /lib /lib64 /lost+found /media /misc /mnt /noah /opt /proc /root /sbin /selinux /srv /sys /tftpboot /tmp /usr /var
+for folder in /DoorGod /initrd /lost+found /media /misc /noah /opt /root /srv /tftpboot /tmp /var
+do
+    jetfire du -sh $folder
+done

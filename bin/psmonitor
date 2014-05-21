@@ -1,0 +1,57 @@
+#!/usr/bin/env python
+# coding: utf-8
+#
+# monitor process
+#
+import psutil
+import argparse
+import time
+
+def human_size(num):
+    for x in ['bytes','KB','MB','GB','TB']:
+        if num < 1024.0:
+            return "%3.1f%s" % (num, x)
+        num /= 1024.0
+
+header_printed = True
+def process_info(p):
+    global header_printed
+    if not p.is_running():
+        return
+    m = p.get_memory_info()
+    pcpu = p.get_cpu_percent()
+    nfds = p.get_num_fds()
+    nfiles = len(p.get_open_files())
+    nconn = len(p.get_connections())
+    nthreads = len(p.get_threads())
+    pmem = p.get_memory_percent()
+    if header_printed:
+        print 'pid pcpu nthreads nconn nfiles nfds rss pmem vms status'
+        header_printed = False
+    print p.pid, '%.1f%%'%pcpu, nthreads, nconn, nfiles, nfds, human_size(m.rss), '%.1f%%'%pmem, human_size(m.vms), p.status
+
+def pgrep(pname):
+    for p in psutil.process_iter():
+        if p.name == pname:
+            yield p
+
+def top(pname):
+    for p in pgrep(pname):
+        print p.name, 'cwd:', p.getcwd()
+        while True:
+            process_info(p)
+            time.sleep(1)
+
+def ps(pname):
+    for p in pgrep(pname):
+        process_info(p)
+
+def main():
+    parser = argparse.ArgumentParser("process resource monitor")
+    parser.add_argument('-n', '--name', dest='name', help='process name')
+    pa = parser.parse_args()
+    print 'monitor:', pa.name
+    top(pa.name)
+
+if __name__ == '__main__':
+    main()
