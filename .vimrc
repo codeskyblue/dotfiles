@@ -1,45 +1,70 @@
-set nocompatible              " be iMproved
-filetype off                  " required!
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
 
-" let Vundle manage Vundle
-" required! 
-Bundle 'gmarik/vundle'
-Bundle 'cespare/vim-golang' 
-Bundle 'Blackrush/vim-gocode'
-" Bundle 'Valloric/YouCompleteMe'
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+"Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+"Plugin 'L9'
+" Git plugin not hosted on GitHub
+"Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+"Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Avoid a name conflict with L9
+"Plugin 'user/L9', {'name': 'newL9'}
+"
+"Plugin 'gmarik/vundle'
 
 " ... other plugin
-" snipmate
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle "garbas/vim-snipmate"
-" Optional:
-Bundle "honza/vim-snippets"
-Bundle "aperezdc/vim-template"
 
-Bundle "vim-scripts/javacomplete"
-Bundle "Pydiction"
-let g:pydiction_location = '$HOME/.vim/bundle/Pydiction/complete-dict'
-Bundle "pythoncomplete"
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'python.vim'
+Plugin 'cespare/vim-golang'
+Plugin 'Blackrush/vim-gocode'
+Plugin 'pylint.vim'
 
-filetype plugin indent on     " required!
+Plugin 'honza/vim-snippets'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
 "
 " Brief help
-" :BundleList          - list configured bundles
-" :BundleInstall(!)    - install (update) bundles
-" :BundleSearch(!) foo - search (or refresh cache first) for foo
-" :BundleClean(!)      - confirm (or auto-approve) removal of unused bundles
+" :PluginList          - list configured plugins
+" :PluginInstall(!)    - install (update) plugins
+" :PluginSearch(!) foo - search (or refresh cache first) for foo
+" :PluginClean(!)      - confirm (or auto-approve) removal of unused plugins
 "
 " see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Bundle commands are not allowed.
+" Put your non-Plugin stuff after this line
+"
 
+" Remember last position
+if has("autocmd")
+	au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+endif
+"
 "set omnifunc=syntaxcomplete#Complete    
-set completeopt=longest,menu
+"set completeopt=longest,menu
+let g:gofmt_command = "goimports"
 autocmd BufWritePre *.go :Fmt
 
+syntax on
 set showcmd
 set ruler
 " enable backspace
@@ -47,6 +72,7 @@ set backspace=indent,eol,start
 set nu
 set mouse=
 set ts=4 sts=4 sw=4
+set encoding=utf-8
 " set expandtab
 autocmd Filetype python set ts=4 sts=4 expandtab
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
