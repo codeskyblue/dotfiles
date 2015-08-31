@@ -6,6 +6,13 @@
 # Distributed under terms of the MIT license.
 #
 
+link(){
+	FILE=$1
+	ln -sf -v "$PWD/$FILE" "$HOME/.$FILE"
+}
+
+link tmux.conf
+exit 0
 
 find ./ -maxdepth 1 -name '.*' | while read filename
 do
