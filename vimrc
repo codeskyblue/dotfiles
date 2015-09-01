@@ -30,7 +30,7 @@ Plugin 'gmarik/Vundle.vim'
 
 " ... other plugin
 
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'python.vim'
 Plugin 'cespare/vim-golang'
 Plugin 'Blackrush/vim-gocode'
@@ -74,6 +74,7 @@ set mouse=
 set ts=4 sts=4 sw=4
 set encoding=utf-8
 " set expandtab
+set completeopt=longest,menu
 autocmd Filetype python set ts=4 sts=4 expandtab
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd Filetype java setlocal omnifunc=javacomplete#Complete

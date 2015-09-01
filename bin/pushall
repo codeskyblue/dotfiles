@@ -1,0 +1,10 @@
+#!/bin/bash
+#
+# git push all
+#
+
+git remote -v | awk '{print $1}' | sort -u | while read REMOTE
+do
+	echo "-- $REMOTE"
+	git push $REMOTE ${1:-master}
+done
