@@ -22,4 +22,22 @@ esac
 
 export PATH=$PATH:$GOPATH/bin:$HOME/.dotfiles/bin
 
+# quick change dir
+qcd(){
+	FILE=$HOME/.qcd.list
+	if test $# -eq 0
+	then
+		echo $PWD >> $FILE
+		echo -e "Add to '$FILE'\n$PWD"
+		return
+	fi
+	if test $(uniq $FILE | grep "$1" | wc -l) -eq 1
+	then
+		cd $(uniq $FILE | grep "$1")
+		return
+	else
+		uniq $FILE | grep "$1"
+	fi
+}
+
 PS1='\u@\h \w $ '
