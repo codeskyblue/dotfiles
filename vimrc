@@ -37,6 +37,7 @@ Plugin 'Blackrush/vim-gocode'
 Plugin 'pylint.vim'
 
 Plugin 'honza/vim-snippets'
+Plugin 'mattn/emmet-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -78,3 +79,5 @@ set completeopt=longest,menu
 autocmd Filetype python set ts=4 sts=4 expandtab
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd Filetype java setlocal omnifunc=javacomplete#Complete
+" tmpl as html
+au BufReadPost *.ezt set syntax=html

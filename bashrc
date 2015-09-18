@@ -40,4 +40,8 @@ qcd(){
 	fi
 }
 
-PS1='\u@\h \w $ '
+#PS1='\u@\h \w $ '
+export GITAWAREPROMPT=~/.dotfiles/git-aware-prompt
+source "${GITAWAREPROMPT}/main.sh"
+
+PS1="\${debian_chroot:+(\$debian_chroot)}\u@\h:\w \[$txtcyn\]\$git_branch\[$txtred\]\$git_dirty\[$txtrst\]\$ "
