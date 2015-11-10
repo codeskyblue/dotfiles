@@ -30,13 +30,27 @@ Plugin 'gmarik/Vundle.vim'
 
 " ... other plugin
 
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'python.vim'
 Plugin 'cespare/vim-golang'
 Plugin 'Blackrush/vim-gocode'
 Plugin 'pylint.vim'
 
+
+" template
+Plugin 'pathogen.vim'
+Plugin 'aperezdc/vim-template'
+Plugin 'digitaltoad/vim-jade'
+
+" snippets
+Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -74,6 +88,8 @@ set mouse=
 set ts=4 sts=4 sw=4
 set encoding=utf-8
 " set expandtab
+"
+set completeopt=longest,menu 
 autocmd Filetype python set ts=4 sts=4 expandtab
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd Filetype java setlocal omnifunc=javacomplete#Complete
