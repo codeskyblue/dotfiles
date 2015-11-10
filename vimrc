@@ -41,16 +41,19 @@ Plugin 'pylint.vim'
 Plugin 'pathogen.vim'
 Plugin 'aperezdc/vim-template'
 Plugin 'digitaltoad/vim-jade'
+Plugin 'mattn/emmet-vim'
 
 " snippets
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -93,3 +96,5 @@ set completeopt=longest,menu
 autocmd Filetype python set ts=4 sts=4 expandtab
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd Filetype java setlocal omnifunc=javacomplete#Complete
+" tmpl as html
+au BufReadPost *.ezt set syntax=html

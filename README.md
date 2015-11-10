@@ -7,4 +7,10 @@ Vim update refer:
 Vim vundle refer:
 <https://github.com/gmarik/Vundle.vim>
 
+## Steps
+
+    git clone git@github.com:codeskyblue/dotfiles ~/.dotfiles
+    . ~/.dotfiles/bashrc
+    
+
 my own dotfiles for linux and mac
