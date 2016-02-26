@@ -14,3 +14,20 @@ Vim vundle refer:
     
 
 my own dotfiles for linux and mac
+
+## bin
+- pp
+
+    implement `pip install --save`
+
+- adduser.sh
+
+    add a new user to linux account
+
+- base64
+
+    Encode a string to BASE64
+
+    ```
+    echo -n hello | base64
+    ```
