@@ -18,7 +18,7 @@ my own dotfiles for linux and mac
 ## bin
 - pp
 
-    implement `pip install --save`
+    An implementation `pip install --save`, update all `cat requirements.txt | xargs -i pp {}`
 
 - adduser.sh
 
