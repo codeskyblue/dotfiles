@@ -1,0 +1,25 @@
+#!/bin/bash -
+#
+# script try to implement pip install --save
+#
+
+set -eu
+
+if test $# -eq 0
+then
+    echo "Usage: $0 <package> (auto save to requirements.txt)"
+fi
+
+if ! test -f requirements.txt
+then
+    touch requirements.txt
+fi
+
+for PKG in "$@"
+do
+    echo -e "\033[32m>>> pip install $PKG\033[0m"
+    pip install "$PKG"
+    sed -i "/^$PKG=.*\$/Id" requirements.txt
+    sed -i "/^$PKG$/Id" requirements.txt
+    pip freeze | grep -i "^$PKG=.*\$" >> requirements.txt
+done
