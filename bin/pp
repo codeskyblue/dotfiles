@@ -19,6 +19,7 @@ for PKG in "$@"
 do
     echo -e "\033[32m>>> pip install $PKG\033[0m"
     pip install "$PKG"
+	touch requirements.txt
     sed -i "/^$PKG=.*\$/Id" requirements.txt
     sed -i "/^$PKG$/Id" requirements.txt
     pip freeze | grep -i "^$PKG=.*\$" >> requirements.txt
