@@ -1,9 +1,21 @@
 #!/bin/sh
 #
 
+if test $(id -u) -ne 0; then
+    echo "Switch to root"
+    sudo "$0" "$@"
+    exit 0
+fi
 
 #for folder in /bin /boot /dev /DoorGod /etc /home /initrd /lib /lib64 /lost+found /media /misc /mnt /noah /opt /proc /root /sbin /selinux /srv /sys /tftpboot /tmp /usr /var
-for folder in /DoorGod /initrd /lost+found /media /misc /noah /opt /root /srv /tftpboot /tmp /var
+for folder in \
+    /root \
+    /var/log /var/lib /var/cache /var /srv \
+    /tmp /bin /boot /data /etc /media /mnt /opt
 do
-    jetfire du -sh $folder
+    if ! test -d $folder; then
+        continue
+    fi
+    echo -n "usage of $folder: "
+    du -sh $folder
 done
