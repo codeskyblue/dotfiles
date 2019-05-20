@@ -20,6 +20,7 @@ set nu
 set mouse=
 set ts=4 sts=4 sw=4
 set encoding=utf-8
+set smartindent
 " set expandtab
 autocmd Filetype python set ts=4 sts=4 expandtab
 "autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
